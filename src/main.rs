@@ -39,8 +39,6 @@ fn is_fizz_test() {
     let fizzies = [3, 6, 9, 12, 300, 60];
 
     for x in fizzies.iter() {
-        //// x is a pointer. See
-        //// [Understanding Pointers](http://paulkoerbitz.de/posts/Understanding-Pointers-Ownership-and-Lifetimes-in-Rust.html)
         assert!(is_fizz(*x));
     }
 }
