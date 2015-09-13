@@ -29,3 +29,9 @@ let fizzies = [3, 6, 9, 12, 300, 60];
   assert!(is_fizz(*x));
 }
 ```
+
+Versions
+========
+
+v.0.0.1 - Initial binary version.
+
