@@ -1,0 +1,9 @@
+[package]
+name = "fizzbuzz"
+version = "0.1.0"
+authors = ["Chris <ignatz@gmail.com>"]
+
+[dev-dependencies]
+quickcheck = "0.2"
+quickcheck_macros = "0.2"
+
