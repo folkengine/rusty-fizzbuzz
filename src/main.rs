@@ -1,3 +1,10 @@
+#![feature(plugin)]
+#![plugin(quickcheck_macros)]
+
+#[cfg(test)]
+extern crate quickcheck;
+
+use quickcheck::{TestResult, quickcheck};
 
 fn is_fizz(x: u32) -> bool {
     (x % 3) == 0
@@ -31,6 +38,15 @@ fn fizzy_print(x: u32) {
 fn main() {
     for i in 1..101 {
         fizzy_print(i);
+    }
+}
+
+#[quickcheck]
+fn prop_fizz(x: u32) -> TestResult {
+    if x % 3 == 0 {
+        TestResult::from_bool(is_fizz(x))
+    } else {
+        TestResult::from_bool(!is_fizz(x))
     }
 }
 

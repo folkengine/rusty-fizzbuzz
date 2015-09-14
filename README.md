@@ -1,5 +1,5 @@
 # rusty-fizzbuzz
-YAFBI - Yet another FizzBuzz implementation. This time in [Rust](https://www.rust-lang.org/)!
+YAFBI - Yet another [FizzBuzz](http://c2.com/cgi/wiki?FizzBuzzTest) implementation. This time in [Rust](https://www.rust-lang.org/)!
 
 I'm going to use this as an initial examples of some ideas of mine. 
 
