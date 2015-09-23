@@ -21,17 +21,10 @@ Some helpful pages:
 
 [Understanding Pointers, Ownership and Lifetimes in Rust](http://paulkoerbitz.de/posts/Understanding-Pointers-Ownership-and-Lifetimes-in-Rust.html)
 
-> This was useful when I was trying to create a larger sample of integers to assert against, such as:
-
-```rust
-let fizzies = [3, 6, 9, 12, 300, 60];
-  for x in fizzies.iter() {
-  assert!(is_fizz(*x));
-}
-```
+> This was useful when I was trying to create a larger sample of integers to assert against.
 
 Versions
 ========
 
-v.0.0.1 - Initial binary version.
+v.0.0.3 - Vector version
 
