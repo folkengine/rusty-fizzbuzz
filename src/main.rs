@@ -1,74 +1,59 @@
-#![feature(plugin)]
-#![plugin(quickcheck_macros)]
 
-#[cfg(test)]
-extern crate quickcheck;
-
-use quickcheck::{TestResult, quickcheck};
-
-fn is_fizz(x: u32) -> bool {
-    (x % 3) == 0
+struct ModGuard {              
+    val: u32,              
+    display: &'static str           
 }
 
-fn is_buzz(x: u32) -> bool {
-    (x % 5) == 0
+fn get_fizzbuzz_guards() -> Vec<ModGuard> {
+    vec![
+        ModGuard{val: 3, display: "Fizz"}, 
+        ModGuard{val: 5, display: "Buzz"}]
 }
 
-fn is_fizzbuzz(x: u32) -> bool {
-    is_fizz(x) && is_buzz(x)
-}
-
-fn fb_string(x: u32) -> String {
-    if is_fizzbuzz(x) {
-        return "FizzBuzz!".to_string();
+fn generate_str(x: u32) -> String {
+    let v = get_fizzbuzz_guards();
+    let mut s = String::from("");
+                
+    for i in 0..v.len() {
+        if x % &v[i].val == 0 {
+            s.push_str(v[i].display);
+        }
     }
-    if is_fizz(x) {
-        return "Fizz".to_string();
+    if s.len() == 0 {
+        x.to_string()
+    } else {
+        s.to_string()
     }
-    if is_buzz(x) {
-        return "Buzz".to_string();
-    }
-    return x.to_string();
 }
 
-fn fizzy_print(x: u32) {
-    println!("{}", fb_string(x));
+fn doit()  {
+    for i in 1..101 {
+        println!("{}", generate_str(i));
+    }
 }
 
 fn main() {
-    for i in 1..101 {
-        fizzy_print(i);
-    }
-}
-
-#[quickcheck]
-fn prop_fizz(x: u32) -> TestResult {
-    if x % 3 == 0 {
-        TestResult::from_bool(is_fizz(x))
-    } else {
-        TestResult::from_bool(!is_fizz(x))
-    }
+    doit() ;
 }
 
 #[test]
 fn is_fizz_test() {
-    let fizzies = [3, 6, 9, 12, 300, 60];
+    let fizzies = [3, 6, 9, 12];
 
     for x in fizzies.iter() {
-        assert!(is_fizz(*x));
+        assert_eq!(generate_str(*x), "Fizz");
     }
 }
 
 #[test]
 fn is_buzz_test() {
 
-    let buzzies = [5, 10, 15, 20];
+    let buzzies = [5, 10, 20];
 
     for x in buzzies.iter() {
-        assert!(is_buzz(*x));
+        assert_eq!(generate_str(*x), "Buzz");
     }
 
-    assert!(!is_buzz(4))
 }
 
 #[test]
@@ -76,6 +61,6 @@ fn is_fizzbuzz_test() {
     let fizzbuzzies = [15, 30, 45, 60];
 
     for x in fizzbuzzies.iter() {
-        assert!(is_fizzbuzz(*x));
+        assert_eq!(generate_str(*x), "FizzBuzz");
     }
 }
